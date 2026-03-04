@@ -1,6 +1,5 @@
 import { createContext, useContext, useReducer } from "react";
 
-// S1 - Create context
 const AuthContext = createContext();
 
 const initialState = {
@@ -15,7 +14,7 @@ function reducer(state, action) {
     case "logout":
       return { ...state, user: null, isAuthenticated: false };
     default:
-      throw new Error("UnKnown action");
+      throw new Error("Unknown action");
   }
 }
 
@@ -29,7 +28,7 @@ const FAKE_USER = {
 function AuthProvider({ children }) {
   const [{ user, isAuthenticated }, dispatch] = useReducer(
     reducer,
-    initialState,
+    initialState
   );
 
   function login(email, password) {
@@ -42,7 +41,7 @@ function AuthProvider({ children }) {
   }
 
   return (
-    <AuthContext.Provider value={{ login, logout, user, isAuthenticated }}>
+    <AuthContext.Provider value={{ user, isAuthenticated, login, logout }}>
       {children}
     </AuthContext.Provider>
   );
@@ -51,8 +50,7 @@ function AuthProvider({ children }) {
 function useAuth() {
   const context = useContext(AuthContext);
   if (context === undefined)
-    throw new Error("AuthContext was used outside the AuthProvider");
-
+    throw new Error("AuthContext was used outside AuthProvider");
   return context;
 }
 
