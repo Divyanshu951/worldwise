@@ -35,6 +35,54 @@
         "lng": 13.376933665713324
       },
       "id": 98443197
+    },
+    {
+      "cityName": "Jarandilla de la Vera",
+      "country": "Spain",
+      "emoji": "🇪🇸",
+      "date": "2026-03-04T19:42:52.344Z",
+      "notes": "dsdasd",
+      "position": {
+        "lat": "40.047410392333774",
+        "lng": "-5.58347029821222"
+      },
+      "id": 98443198
+    },
+    {
+      "cityName": "Gurrea de Gallego",
+      "country": "Spain",
+      "emoji": "🇪🇸",
+      "date": "2026-03-04T19:44:53.670Z",
+      "notes": "sdfsdfsdf",
+      "position": {
+        "lat": "42.08378871078003",
+        "lng": "-0.7282699642937529"
+      },
+      "id": 98443199
+    },
+    {
+      "cityName": "Godojos",
+      "country": "Spain",
+      "emoji": "🇪🇸",
+      "date": "2026-03-04T19:45:25.522Z",
+      "notes": "sdfsdfsf",
+      "position": {
+        "lat": "41.28003614529918",
+        "lng": "-1.8481332875839867"
+      },
+      "id": 98443200
+    },
+    {
+      "cityName": "Valdepenas de Jaen",
+      "country": "Spain",
+      "emoji": "🇪🇸",
+      "date": "2026-03-04T19:46:25.680Z",
+      "notes": "asdasd",
+      "position": {
+        "lat": "37.60092876380747",
+        "lng": "-3.7389895304400964"
+      },
+      "id": 98443201
     }
   ]
 }
