@@ -13,7 +13,7 @@ import SpinnerFullPage from "./components/SpinnerFullPage";
 
 // import Product from "./pages/Product";
 // import Pricing from "./pages/Pricing";
-// import Homepage from "./pages/Homepage";
+// import Homepage from "./pages/Homepage"; 
 // import Login from "./pages/Login";
 // import AppLayout from "./pages/AppLayout";
 // import PageNotFound from "./pages/PageNotFound";

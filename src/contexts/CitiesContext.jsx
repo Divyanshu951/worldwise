@@ -6,45 +6,6 @@ import {
   useCallback,
 } from "react";
 
-const tempCities = [
-  {
-    cityName: "Lisbon",
-    country: "Portugal",
-    emoji: "🇵🇹",
-    date: "2027-10-31T15:59:59.138Z",
-    notes: "My favorite city so far!",
-    position: {
-      lat: 38.727881642324164,
-      lng: -9.140900099907554,
-    },
-    id: 73930385,
-  },
-  {
-    cityName: "Madrid",
-    country: "Spain",
-    emoji: "🇪🇸",
-    date: "2027-07-15T08:22:53.976Z",
-    notes: "",
-    position: {
-      lat: 40.46635901755316,
-      lng: -3.7133789062500004,
-    },
-    id: 17806751,
-  },
-  {
-    cityName: "Berlin",
-    country: "Germany",
-    emoji: "🇩🇪",
-    date: "2027-02-12T09:24:11.863Z",
-    notes: "Amazing 😃",
-    position: {
-      lat: 52.53586782505711,
-      lng: 13.376933665713324,
-    },
-    id: 98443197,
-  },
-];
-
 const BASE_URL = "http://localhost:9000";
 
 const CitiesContext = createContext();
@@ -87,39 +48,11 @@ function reducer(state, action) {
         currentCity: {},
       };
 
-    case "fetch/rejected":
+    case "rejected":
       return {
         ...state,
         isLoading: false,
-        cities: [...tempCities],
-        error: "API not active, Using offline data",
-      };
-    case "get/rejected":
-      return {
-        ...state,
-        isLoading: false,
-        currentCity: state.cities.find(
-          (city) => city.id === Number(action.payload),
-        ),
-        error: "API not active, Using offline data",
-      };
-
-    case "create/rejected":
-      return {
-        ...state,
-        isLoading: false,
-        cities: [...state.cities, { ...action.payload, id: Date.now() }],
-        currentCity: action.payload,
-        error: "API not active, Using offline data",
-      };
-
-    case "delete/rejected":
-      return {
-        ...state,
-        isLoading: false,
-        cities: state.cities.filter((city) => city.id !== action.payload),
-        currentCity: {},
-        error: "API not active, Using offline data",
+        error: action.payload,
       };
 
     default:
@@ -130,7 +63,7 @@ function reducer(state, action) {
 function CitiesProvider({ children }) {
   const [{ cities, isLoading, currentCity, error }, dispatch] = useReducer(
     reducer,
-    initialState,
+    initialState
   );
 
   useEffect(function () {
@@ -143,7 +76,8 @@ function CitiesProvider({ children }) {
         dispatch({ type: "cities/loaded", payload: data });
       } catch {
         dispatch({
-          type: "fetch/rejected",
+          type: "rejected",
+          payload: "There was an error loading cities...",
         });
       }
     }
@@ -162,12 +96,12 @@ function CitiesProvider({ children }) {
         dispatch({ type: "city/loaded", payload: data });
       } catch {
         dispatch({
-          type: "get/rejected",
-          payload: id,
+          type: "rejected",
+          payload: "There was an error loading the city...",
         });
       }
     },
-    [currentCity.id],
+    [currentCity.id]
   );
 
   async function createCity(newCity) {
@@ -182,11 +116,12 @@ function CitiesProvider({ children }) {
         },
       });
       const data = await res.json();
+
       dispatch({ type: "city/created", payload: data });
     } catch {
       dispatch({
-        type: "create/rejected",
-        payload: newCity,
+        type: "rejected",
+        payload: "There was an error creating the city...",
       });
     }
   }
@@ -202,8 +137,8 @@ function CitiesProvider({ children }) {
       dispatch({ type: "city/deleted", payload: id });
     } catch {
       dispatch({
-        type: "delete/rejected",
-        payload: id,
+        type: "rejected",
+        payload: "There was an error deleting the city...",
       });
     }
   }
